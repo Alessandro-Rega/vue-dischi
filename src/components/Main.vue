@@ -1,15 +1,16 @@
 <template>
   <main>
       <div class="selezione">
-        <select name="genere" id="genere">
+        <select name="genere" id="genere" v-model="searchDisco" @change="cercaDischi">
+            <option value="">All</option>
             <option value="rock">Rock</option>
             <option value="pop">Pop</option>
             <option value="jazz">Jazz</option>
             <option value="metal">Metal</option>
         </select>
       </div>
-      <div class="container">
-        <Dischi v-for="(disco, index) in arrayDischi" :key="index" :dati="disco"/>
+      <div class="container" v-if="arrayDischi != null">
+        <Dischi v-for="(disco, index) in dischiFiltro" :key="index" :dati="disco"/>
       </div>
   </main>
 </template>
@@ -25,7 +26,8 @@ export default {
     },
     data(){
         return {
-            arrayDischi: null
+            arrayDischi: null,
+            searchDisco: ""
         }
     },
     created(){
@@ -33,12 +35,25 @@ export default {
         .then((response) => {
             // handle success
             this.arrayDischi = response.data.response;
-            console.log(this.arrayDischi);
         })
         .catch(function (error) {
             // handle error
             console.log(error);
         });
+    },
+    methods: {
+        cercaDischi() {
+            // this.searchDisco = this.searchDisco;
+        }
+    },
+    computed:{
+        dischiFiltro() {
+            console.log(this.searchDisco);
+            const arrayDischiFiltrato = this.arrayDischi.filter( (elm) => {
+                return elm.genre.toLowerCase().includes(this.searchDisco.toLowerCase()); // true o false
+            });
+            return arrayDischiFiltrato;
+        }
     }
 }
 </script>
