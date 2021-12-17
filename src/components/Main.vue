@@ -1,5 +1,13 @@
 <template>
   <main>
+      <div class="selezione">
+        <select name="genere" id="genere">
+            <option value="rock">Rock</option>
+            <option value="pop">Pop</option>
+            <option value="jazz">Jazz</option>
+            <option value="metal">Metal</option>
+        </select>
+      </div>
       <div class="container">
         <Dischi v-for="(disco, index) in arrayDischi" :key="index" :dati="disco"/>
       </div>
@@ -41,7 +49,20 @@ main{
     width: 100%;
     height: calc(100vh - 90px);
     background-color: #1e2d3b;
-    padding-top: 50px;
+
+    .selezione{
+        width: 70%;
+        height: 50px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        text-align: left;
+        line-height: 45px;
+
+        #genere{
+            padding: 5px 20px;
+            margin-left: 20px;
+        }
+    }
 
     .container{
         width: 70%;

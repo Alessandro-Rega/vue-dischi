@@ -32,7 +32,7 @@ export default {
     .titolo{
         color: white;
         font-size: 25px;
-        padding: 10px 0 20px 0;
+        padding: 10px 0 15px 0;
     }
 
     span{
